@@ -1,0 +1,1 @@
+docker run -p 8000 -v $(pwd)/logs.txt:/root/backend-example-docker/logs.txt backend 
