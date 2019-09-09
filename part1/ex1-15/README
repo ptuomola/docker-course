@@ -1,0 +1,12 @@
+Hello world in Node.js (built from repository https://github.com/ptuomola/node-hello-world)
+
+Start the Docker image with:
+
+docker run -p 3000:3000 ptuomola/node-hello-world
+
+The image has started successfully when you see:
+
+Server running at http://127.0.0.1:3000/
+
+When you open a browser at http://127.0.0.1:3000/ you should see "Hello world"
+

@@ -1,0 +1,11 @@
+Created a Java development environment based on the latest Ubuntu
+
+Installed software:
+- Default JDK (OpenJDK 11)
+- VIM
+- Maven
+
+Built with: docker build . -t java-dev-env
+Run with: docker run -it java-dev-env
+
+Available from Docker Hub at ptuomola/java-dev-env
