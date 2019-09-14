@@ -1,0 +1,6 @@
+- Changed environment variables in the Docker projects:
+	backend - change the frontend URL to http://localhost (without port)
+	frontend - change the backend URL to http://localhost/api (without port)
+
+- Added "depends_on" for nginx to start after frontend and backend
+

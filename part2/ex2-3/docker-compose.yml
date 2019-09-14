@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backend-example-docker:
+    image: backend
+    build: ../../part1/ex1-12/backend
+    ports:
+      - 8000:8000
+
+  frontend-example-docker:
+    image: frontend
+    build: ../../part1/ex1-12/frontend
+    ports:
+      - 5000:5000
