@@ -1,0 +1,54 @@
+BACKEND
+-------
+
+Starting point
+
+"docker history backend" before any optimisations:
+
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+182b877d78a6        22 hours ago        /bin/sh -c #(nop)  ENTRYPOINT ["/usr/bin/npm…   0B                  
+040b37f61122        22 hours ago        /bin/sh -c #(nop)  EXPOSE 8000                  0B                  
+6cb1df723d38        22 hours ago        /bin/sh -c #(nop)  ENV FRONT_URL=http://loca…   0B                  
+9bb80d41fe3b        23 hours ago        /bin/sh -c npm install                          58.4MB              
+b2991911da77        23 hours ago        /bin/sh -c apt-get install -y nodejs            98.3MB              
+c58794171355        23 hours ago        /bin/sh -c curl -sL https://deb.nodesource.c…   33.3MB              
+fea34f7987ea        23 hours ago        /bin/sh -c #(nop) WORKDIR /root/backend-exam…   0B                  
+c107ed9166ba        23 hours ago        /bin/sh -c git clone https://github.com/dock…   520kB               
+276595420d11        23 hours ago        /bin/sh -c apt-get update && apt-get install…   116MB               
+bec07d286d18        23 hours ago        /bin/sh -c #(nop) WORKDIR /root                 0B                  
+5e13f8dd4c1a        7 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
+<missing>           7 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B                  
+<missing>           7 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B                
+<missing>           7 weeks ago         /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
+<missing>           7 weeks ago         /bin/sh -c #(nop) ADD file:603693e48cdc7f0c5…   120MB               
+
+Total size before optimisations 426MB
+
+-----
+
+Optimisations:
+
+1.  Reorganise Dockerfile order
+2.  Add "apt-get purge" for curl and git
+3.  Remove /var/lib/apt/lists/*
+
+-----
+
+"docker history backend" after optimisations
+
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+c0fa1694d1ca        21 seconds ago       /bin/sh -c #(nop)  ENTRYPOINT ["/usr/bin/npm…   0B                  
+73bf9407f47d        21 seconds ago       /bin/sh -c #(nop)  EXPOSE 8000                  0B                  
+a29c643fb67b        22 seconds ago       /bin/sh -c npm install                          58.4MB              
+80eeed788e7c        38 seconds ago       /bin/sh -c #(nop) WORKDIR /app/backend-examp…   0B                  
+ba3ecabff896        39 seconds ago       /bin/sh -c apt-get update && apt-get install…   146MB               
+870f534827bd        About a minute ago   /bin/sh -c #(nop) WORKDIR /app                  0B                  
+ea9216c29d1f        About a minute ago   /bin/sh -c #(nop)  ENV FRONT_URL=http://loca…   0B                  
+5e13f8dd4c1a        7 weeks ago          /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
+<missing>           7 weeks ago          /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B                  
+<missing>           7 weeks ago          /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B                
+<missing>           7 weeks ago          /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
+<missing>           7 weeks ago          /bin/sh -c #(nop) ADD file:603693e48cdc7f0c5…   120MB               
+
+Total size after optimisations 324MB
+

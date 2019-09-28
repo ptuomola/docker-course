@@ -1,0 +1,1 @@
+docker run -v $(pwd)/output:/app/output yle-dl -o output/uutiset https://areena.yle.fi/1-4560494
