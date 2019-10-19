@@ -4,9 +4,9 @@ Decided to set up a Kubernetes cluster for frontend and backend applications
 1. Installed minikube with brew cask install minikube
 2. Created a cluster with "minikube start"
 3. Installed helm with brew install kubernetes-helm
-4. Created a service account for tiller with the correct role
-5. Created a template helm chart with "helm create"
-6. Created helm chart to set up frontend and backend
+4. Created a service account for tiller with the correct role (using dashboard-adminuser.yaml)
+5. Created a template helm chart with "helm create" with name "Frontback"
+6. Configured the template helm chart to set up frontend and backend example applications 
 7. Set up configuration variables and services to support deployment to minikube
 8. Added redis chart as dependency, configured to turn off password authentication
 9. Added postgresql chart as dependency, configured password for postgres user

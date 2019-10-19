@@ -6,6 +6,6 @@ WORKDIR /root/backend-example-docker
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
 RUN apt-get install -y nodejs
 RUN npm install
-ENV FRONT_URL=http://192.168.99.107:5000
+ENV FRONT_URL=http://localhost:5000
 EXPOSE 8000
 ENTRYPOINT ["/usr/bin/npm", "start"]
