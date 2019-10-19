@@ -1,0 +1,51 @@
+Optimised Spring sample project from Part 1 exercise 13
+
+Size before 574 MB
+
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+7ae33bbe57d3        13 seconds ago      /bin/sh -c #(nop)  ENTRYPOINT ["java" "-jar"…   0B                  
+4d08e6c75dfd        14 seconds ago      /bin/sh -c #(nop)  EXPOSE 8080                  0B                  
+05cbb2d38966        14 seconds ago      /bin/sh -c ./mvnw package                       85.3MB              
+0c75a9c1f305        54 seconds ago      /bin/sh -c #(nop) WORKDIR /spring-example-pr…   0B                  
+b5069b557b43        54 seconds ago      /bin/sh -c git clone https://github.com/dock…   56kB                
+e8d00769c8a8        2 weeks ago         /bin/sh -c set -eux;   dpkgArch="$(dpkg --pr…   205MB               
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV JAVA_URL_VERSION=8u22…   0B                  
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV JAVA_BASE_URL=https:/…   0B                  
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV JAVA_VERSION=8u222       0B                  
+<missing>           2 weeks ago         /bin/sh -c { echo '#/bin/sh'; echo 'echo "$J…   27B                 
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV PATH=/usr/local/openj…   0B                  
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV JAVA_HOME=/usr/local/…   0B                  
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV LANG=C.UTF-8             0B                  
+<missing>           2 weeks ago         /bin/sh -c set -eux;  apt-get update;  apt-g…   9.67MB              
+<missing>           2 weeks ago         /bin/sh -c apt-get update && apt-get install…   142MB               
+<missing>           2 weeks ago         /bin/sh -c set -ex;  if ! command -v gpg > /…   7.81MB              
+<missing>           2 weeks ago         /bin/sh -c apt-get update && apt-get install…   23.2MB              
+<missing>           2 weeks ago         /bin/sh -c #(nop)  CMD ["bash"]                 0B                  
+<missing>           2 weeks ago         /bin/sh -c #(nop) ADD file:9788b61de35351489…   101MB 
+
+Steps
+
+1. Split to multi-stage build with the second stage using openjdk-jre-alpine
+2. Move workdir to /app
+3. Add spring user and switch to use that user
+
+Size after 121 MB
+
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+1943b8c3643b        About a minute ago   /bin/sh -c #(nop)  ENTRYPOINT ["java" "-jar"…   0B                  
+d4abebc239d6        About a minute ago   /bin/sh -c #(nop)  EXPOSE 8080                  0B                  
+f4fca316f977        About a minute ago   /bin/sh -c #(nop)  USER spring                  0B                  
+1180faae3f00        About a minute ago   /bin/sh -c adduser -D spring &&     chown -R…   18.2MB              
+cb88d7d95c04        About a minute ago   /bin/sh -c #(nop) COPY dir:a2c05b35b2a9d453e…   18.2MB              
+8565527b4daf        About a minute ago   /bin/sh -c #(nop) WORKDIR /app                  0B                  
+f7a292bbb70c        4 months ago         /bin/sh -c set -x  && apk add --no-cache   o…   79.4MB              
+<missing>           4 months ago         /bin/sh -c #(nop)  ENV JAVA_ALPINE_VERSION=8…   0B                  
+<missing>           4 months ago         /bin/sh -c #(nop)  ENV JAVA_VERSION=8u212       0B                  
+<missing>           4 months ago         /bin/sh -c #(nop)  ENV PATH=/usr/local/sbin:…   0B                  
+<missing>           4 months ago         /bin/sh -c #(nop)  ENV JAVA_HOME=/usr/lib/jv…   0B                  
+<missing>           4 months ago         /bin/sh -c {   echo '#!/bin/sh';   echo 'set…   87B                 
+<missing>           4 months ago         /bin/sh -c #(nop)  ENV LANG=C.UTF-8             0B                  
+<missing>           4 months ago         /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B                  
+<missing>           4 months ago         /bin/sh -c #(nop) ADD file:a86aea1f3a7d68f6a…   5.53MB              
+
+

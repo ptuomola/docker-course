@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "examplechart.fullname" . }}-backend
+  labels:
+{{ include "examplechart.labels" . | indent 4 }}-backend
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "examplechart.name" . }}-backend
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "examplechart.name" . }}-backend
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+    {{- with .Values.backend.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}-backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          env:
+          - name: FRONT_URL
+            value: http://{{ .Values.frontend.minikubeip }}:{{ .Values.frontend.service.nodePort }}
+          - name: REDIS
+            value: {{ .Release.Name }}-redis-master
+          - name: DB_USERNAME
+            value: postgres
+          - name: DB_PASSWORD
+            value: {{ .Values.postgresql.postgresqlPassword }} 
+          - name: DB_HOST
+            value: {{ .Release.Name }}-postgresql
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.containerPort }} 
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+      {{- with .Values.backend.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.backend.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backend.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

@@ -1,0 +1,19 @@
+Decided to set up a Kubernetes cluster for frontend and backend applications
+(together with redis and postgresql) using minikube and Helm charts on MacOS
+
+1. Installed minikube with brew cask install minikube
+2. Created a cluster with "minikube start"
+3. Installed helm with brew install kubernetes-helm
+4. Created a service account for tiller with the correct role
+5. Created a template helm chart with "helm create"
+6. Created helm chart to set up frontend and backend
+7. Set up configuration variables and services to support deployment to minikube
+8. Added redis chart as dependency, configured to turn off password authentication
+9. Added postgresql chart as dependency, configured password for postgres user
+10. Increased initialDelaySeconds for frontend livenessprobe to allow time to start
+11. Configured backend to use postgresql and redis
+12. Deployed the chart with "helm install"
+
+After this, all the expected functionality works - links to backend, cache, and 
+sending messages to database. 
+

@@ -1,0 +1,4 @@
+Application URL is:
+
+	http://{{ .Values.frontend.minikubeip }}:{{ .Values.frontend.service.nodePort}}/ 
+
