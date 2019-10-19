@@ -1,0 +1,47 @@
+Docker history before
+
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+0856215a60cf        16 minutes ago      /bin/sh -c #(nop)  ENTRYPOINT ["/usr/bin/npm…   0B                  
+a6b786a277fa        16 minutes ago      /bin/sh -c #(nop)  EXPOSE 8000                  0B                  
+07d854c49434        16 minutes ago      /bin/sh -c npm install                          58.4MB              
+090730640cfb        17 minutes ago      /bin/sh -c #(nop) WORKDIR /app/backend-examp…   0B                  
+9e8f2a0a55b6        17 minutes ago      /bin/sh -c #(nop)  USER backend                 0B                  
+47f93033c236        17 minutes ago      /bin/sh -c apt-get update && apt-get install…   146MB               
+870f534827bd        10 hours ago        /bin/sh -c #(nop) WORKDIR /app                  0B                  
+ea9216c29d1f        10 hours ago        /bin/sh -c #(nop)  ENV FRONT_URL=http://loca…   0B                  
+5e13f8dd4c1a        7 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
+<missing>           7 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B                  
+<missing>           7 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B                
+<missing>           7 weeks ago         /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
+<missing>           7 weeks ago         /bin/sh -c #(nop) ADD file:603693e48cdc7f0c5…   120MB               
+
+Size before 324 MB
+
+-------
+
+docker history backend after
+
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+6f540b95abb5        11 seconds ago      /bin/sh -c #(nop)  ENTRYPOINT ["/usr/bin/npm…   0B                  
+75f8e1455eac        11 seconds ago      /bin/sh -c #(nop)  EXPOSE 8000                  0B                  
+8fa967507a79        12 seconds ago      /bin/sh -c npm install                          58.4MB              
+22c736a03a6c        4 minutes ago       /bin/sh -c #(nop) WORKDIR /app/backend-examp…   0B                  
+56469515ac57        4 minutes ago       /bin/sh -c #(nop)  USER backend                 0B                  
+2983541da48e        4 minutes ago       /bin/sh -c apk add --no-cache git && git clo…   547kB               
+e7f2d2c45d4a        12 minutes ago      /bin/sh -c #(nop) WORKDIR /app                  0B                  
+9c37f0599c54        12 minutes ago      /bin/sh -c #(nop)  ENV FRONT_URL=http://loca…   0B                  
+ef7d474eab14        9 days ago          /bin/sh -c #(nop)  CMD ["node"]                 0B                  
+<missing>           9 days ago          /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B                  
+<missing>           9 days ago          /bin/sh -c #(nop) COPY file:238737301d473041…   116B                
+<missing>           9 days ago          /bin/sh -c apk add --no-cache --virtual .bui…   5.5MB               
+<missing>           9 days ago          /bin/sh -c #(nop)  ENV YARN_VERSION=1.17.3      0B                  
+<missing>           9 days ago          /bin/sh -c addgroup -g 1000 node     && addu…   69.3MB              
+<missing>           9 days ago          /bin/sh -c #(nop)  ENV NODE_VERSION=12.10.0     0B                  
+<missing>           4 months ago        /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B                  
+<missing>           4 months ago        /bin/sh -c #(nop) ADD file:a86aea1f3a7d68f6a…   5.53MB 
+
+Size after 138 MB
+
+------
+
+
